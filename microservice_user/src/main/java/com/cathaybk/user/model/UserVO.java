@@ -5,35 +5,57 @@ package com.cathaybk.user.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+@Entity
+@Table(name = "USER_TB")
 public class UserVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private Integer id;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer userId;
+	
+	@Column
 	private String username;
+	
+	@Column
 	private String password;
+	
+	@Column
 	private String sex;
+	
+	@Column
 	private Double money;
 	
 	public UserVO() {
 		super();
 	}
 
-	public UserVO(Integer id, String username, String password, String sex, Double money) {
+	public UserVO(Integer userId, String username, String password, String sex, Double money) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.sex = sex;
 		this.money = money;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -70,8 +92,7 @@ public class UserVO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserVO [id=" + id + ", username=" + username + ", password=" + password + ", sex=" + sex + ", money="
-				+ money + "]";
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.SIMPLE_STYLE);
 	}
 	
 }
