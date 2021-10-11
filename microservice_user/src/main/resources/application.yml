@@ -1,0 +1,5 @@
+server:
+  port: 9001
+spring: # 服務名稱（SpringCloud調用時才會用到）
+  application:
+    name: microservice-user
