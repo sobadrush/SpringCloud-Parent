@@ -49,6 +49,14 @@ public class UserVO implements Serializable {
 		this.sex = sex;
 		this.money = money;
 	}
+	
+	public UserVO(String username, String password, String sex, Double money) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.sex = sex;
+		this.money = money;
+	}
 
 	public Integer getUserId() {
 		return userId;

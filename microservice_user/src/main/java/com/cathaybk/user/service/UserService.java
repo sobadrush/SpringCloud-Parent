@@ -18,4 +18,20 @@ public class UserService {
 		return userDAO.findAll();
 	}
 	
+	public UserVO getUserById(Integer uId) {
+		return userDAO.findById(uId).get();
+	}
+	
+	public UserVO addUser(UserVO userVO) {
+		return userDAO.save(userVO);
+	}
+	
+	public UserVO updateUserById(UserVO userVO) {
+		return userDAO.save(userVO);
+	}
+	
+	public void deleteById(Integer uId) {
+		userDAO.deleteById(uId);
+	}
+	
 }
