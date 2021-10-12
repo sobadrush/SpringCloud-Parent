@@ -25,3 +25,11 @@ spring: # 服務名稱（SpringCloud調用時才會用到）
 #      - "classpath*:mySchema.sql"
       data-locations:
       - 'classpath*:myImportData.sql'
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: trace
+  pattern:
+        console: "[%p]-%msg%n"
+        
+        
+        
