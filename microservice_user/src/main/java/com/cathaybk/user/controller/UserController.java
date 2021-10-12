@@ -3,6 +3,8 @@ package com.cathaybk.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +20,7 @@ public class UserController {
 	private UserService userSvc;
 	
 	// 查詢所有USER
-	@RequestMapping(value = { "getAllUsers" }, method = { RequestMethod.GET })
+	@RequestMapping(value = { "/getAllUsers" }, method = { RequestMethod.GET })
 	public List<UserVO> getAllUsers() {
 //		List<UserVO> userList = 
 //				 Stream.of(
@@ -31,4 +33,34 @@ public class UserController {
 		return userList;
 	}
 	
+	@RequestMapping(value = "/getUserById/{uid}", method = RequestMethod.GET)
+	public UserVO getUserById(@PathVariable("uid") int userId) {
+		return userSvc.getUserById(userId);
+	}
+	
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	public String addUser(@RequestBody(required = true) UserVO userVO) {
+		String rtnMsg = "";
+		try {
+			userSvc.addUser(userVO);
+			rtnMsg = "新增成功";
+		} catch (Exception e) {
+			e.printStackTrace();
+			rtnMsg = "新增失敗";
+		}
+		return rtnMsg;
+	}
+	
+	@RequestMapping(value = "/deleteUser/{uid}", method = RequestMethod.DELETE)
+	public String addUser(@PathVariable("uid") int userId) {
+		String rtnMsg = "";
+		try {
+			userSvc.deleteById(userId);
+			rtnMsg = "刪除成功";
+		} catch (Exception e) {
+			e.printStackTrace();
+			rtnMsg = "刪除失敗";
+		}
+		return rtnMsg;
+	}
 }
