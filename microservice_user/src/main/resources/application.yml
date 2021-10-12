@@ -15,7 +15,9 @@ spring: # 服務名稱（SpringCloud調用時才會用到）
     database: mysql
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQL8Dialect  
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate.format_sql: true
   sql: # 自動塞初始資料
     init:
       mode: always

@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cathaybk.user.dao.UserDAO;
 import com.cathaybk.user.model.UserVO;
+import com.cathaybk.user.service.UserService;
 
 @RequestMapping("/user")
 @RestController // = @RequestMapping + @ResponseBody
 public class UserController {
 
 	@Autowired
-	private UserDAO userDAO;
+	private UserService userSvc;
 	
 	// 查詢所有USER
 	@RequestMapping(value = { "getAllUsers" }, method = { RequestMethod.GET })
@@ -27,7 +27,7 @@ public class UserController {
 //						 new UserVO(1001, "Elsa", "2222", "female", 24000D)
 //				 )
 //				.collect(Collectors.toList());
-		List<UserVO> userList = userDAO.findAll();
+		List<UserVO> userList = userSvc.getAllUser();
 		return userList;
 	}
 	
