@@ -20,6 +20,16 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.cathaybk</groupId>
+				<artifactId>dependencyRoot</artifactId>
+				<version>0.0.1-SNAPSHOT</version><!-- maven 打包預設 0.0.1-SNAPSHOT 版本 -->
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<!-- 啟用SpringMVC + 內建的JSON轉換 -->
 		<dependency>
@@ -37,7 +47,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- capache ommons-lang3 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -49,5 +59,9 @@
 
 	<modules>
 		<module>microservice_user</module>
+		<module>microservice_movie</module>
+		<module>dependencyRoot</module>
 	</modules>
 </project>
+
+

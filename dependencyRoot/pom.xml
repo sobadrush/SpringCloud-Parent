@@ -7,28 +7,15 @@
 		<artifactId>SpringCloud-Parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>microservice_user</artifactId>
-
+	<artifactId>dependencyRoot</artifactId>
+	<description>放置其他模組會引用的class的模組</description>
+	
 	<dependencies>
-	
-		<!-- 引用放在dependencyRoot包中的 UserVO -->
-		<dependency>
-            <groupId>com.cathaybk</groupId>
-            <artifactId>dependencyRoot</artifactId>
-            <!-- <version>0.0.1-SNAPSHOT</version> -->
-        </dependency>
-	
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-		    <groupId>mysql</groupId>
-		    <artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 	</dependencies>
-
+	
 </project>
