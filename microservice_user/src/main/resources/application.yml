@@ -1,8 +1,8 @@
 server:
   port: 9001
-spring: # 服務名稱（SpringCloud調用時才會用到）
+spring:
   application:
-    name: microservice-user
+    name: microservice-user # 服務名稱（SpringCloud調用時才會用到）
   datasource:
     #url: jdbc:mysql://localhost:3306/SPRING_CLOUD_TEST?characterEncoding=UTF8
     url: jdbc:mysql://localhost:3306/SPRING_CLOUD_TEST?useUnicode=true&characterEncoding=UTF-8&useSSL=false
@@ -27,9 +27,17 @@ spring: # 服務名稱（SpringCloud調用時才會用到）
       - 'classpath*:myImportData.sql'
 logging:
   level:
-    org.hibernate.type.descriptor.sql: trace
+    org.hibernate.type.descriptor.sql: trace # 讓JPA可顯示SQL參數
   pattern:
         console: "[%p]-%msg%n"
+eureka:
+  client:
+    register-with-eureka: true # 作為客戶端是否需要註冊到 Eureka Server
+    fetch-registry: true # 作為Eureka客戶端，是否要獲取註冊訊息
+    service-url:
+      defaultZone: http://127.0.0.1:8888/eureka # 客戶端註冊地址( ★★★ 這邊要一定要寫 /eureka，不是寫 serviceName)
+  instance:
+    prefer-ip-address: true # 優先使用該服務的ip地址註冊到Eureka，在生產環境設為true
         
         
         
