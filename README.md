@@ -19,3 +19,5 @@
 |Maven - 排除 dependency , <exclusions>|shorturl.at/eEJP5|
 |Spring-Boot vs Spring-cloud版本造成錯誤|SpringCloud: Error creating bean with name ‘configurationPropertiesBeans‘<br>shorturl.at/luHJ8|
 |dependencyManagement作用说明|裡只是聲明依賴，並不自動實現引入，因此子項目需要顯示的聲明需要用的依賴。 如果不在子項目中聲明依賴，是不會從父項目中繼承下來的；只有在子項目中寫了該依賴項，並且沒有指定具體版本，才會從父項目中繼承該項，並且version和scope都讀取自父pom;另外如果子項目中指定了版本號，那麼會使用子項目中指定的jar版本|
+|一次打包引發的思考，原來maven還能這麼玩？|https://iter01.com/552665.html|
+
