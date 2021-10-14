@@ -8,7 +8,7 @@ eureka:
     register-with-eureka: true # 作為Eureka客戶端，是否要將自己註冊到Eureka Server
     fetch-registry: true # 作為Eureka客戶端，是否要獲得伺服端資訊
     service-url:
-      defaultZone: http://127.0.0.1:8888/eureka # 客戶端註冊地址( ★★★ 這邊要一定要寫 /eureka，不是寫 serviceName)
+      defaultZone: http://127.0.0.1:8888/eureka, http://127.0.0.1:9999/eureka # 客戶端註冊地址( ★★★ 這邊要一定要寫 /eureka，不是寫 serviceName)
   instance:
     prefer-ip-address: true # 優先使用該服務的ip地址註冊到Eureka，在生產環境設為true
     
