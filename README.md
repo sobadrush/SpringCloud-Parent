@@ -28,3 +28,17 @@
 * For集群配置-可編輯Eclipse中的Spring Boot App啟動配置修改port起多個instance
 * For集群配置-spring.application.name都要相同
 * For集群配置-client端服務要對2個Eureka註冊(逗號分隔
+
+## 電影購票服務
+* microservice-movie 調用 microservice-user
+* 稱 microservice-movie 為 『服務調用方』
+* 稱 microservice-user 為 『服務提供方』
+* 消費方：fetch-registry 必須要為 true，才可獲得提供方
+* 消費方：register-with-eureka 不一定要是 true
+
+## Eureka 失效剔除與自我保護
+* 失效剔除 - Eureka Server每隔60秒對其認定為失效的服務(超過90秒沒續約的)進行剔除
+* 	修改掃描失效服務的間隔時間(預設60秒): eureka.server.eviction-interval-timer-in-ms: 60000 (單位毫秒)
+* 自我保護 - Eureka會統計最近15分鐘心跳失敗的服務之比例是否超過85%，就將服務剔除，但實務上可能因為網路速度等其他因素造成，PROD環境最好可以調整此參數
+* 	enable-self-preservation: false # 自我保護機制(false: 取消，預設是 true)
+	

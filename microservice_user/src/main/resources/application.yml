@@ -1,3 +1,6 @@
+################################
+# 服務提供者
+################################
 server:
   port: 9001
 spring:
@@ -35,9 +38,10 @@ eureka:
     register-with-eureka: true # 作為客戶端是否需要註冊到 Eureka Server
     fetch-registry: true # 作為Eureka客戶端，是否要獲取註冊訊息
     service-url:
-      defaultZone: http://127.0.0.1:8888/eureka, http://127.0.0.1:9999/eureka # 客戶端註冊地址( ★★★ 這邊要一定要寫 /eureka，不是寫 serviceName)
+      defaultZone: http://127.0.0.1:8888/eureka,http://127.0.0.1:9999/eureka # 客戶端註冊地址( ★★★ 這邊要一定要寫 /eureka，不是寫 serviceName)
   instance:
     prefer-ip-address: true # 優先使用該服務的ip地址註冊到Eureka，在生產環境設為true
-        
+    lease-renewal-interval-in-seconds: 5 # 服務續約(發heart-beat)間隔，預設30秒
+    lease-expiration-duration-in-seconds: 10 # 服務失效時間，預設90秒
         
         

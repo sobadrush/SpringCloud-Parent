@@ -3,19 +3,24 @@ server:
 spring:
   application:
     name: eureka-server
+    
 # 單機版配置
-#eureka:
-#  client:
-#    register-with-eureka: false # 是否需要把該服務註冊到Eureka（單機版不需要）
-#    fetch-registry: false # 是否需要從Eureka獲取註冊訊息
-#    service-url: # 暴露Eureka的註冊地址
-#      defaultZone: http://127.0.0.1:${server.port}/eureka
-
-# 分散式配置(cluster)
 eureka:
   client:
-    register-with-eureka: true # 是否需要把該服務註冊到Eureka（集群版需要）
-    fetch-registry: true # 是否需要從Eureka獲取註冊訊息
+    register-with-eureka: false # 是否需要把該服務註冊到Eureka（單機版不需要）
+    fetch-registry: false # 是否需要從Eureka獲取註冊訊息
     service-url: # 暴露Eureka的註冊地址
-      defaultZone: http://127.0.0.1:9999/eureka # 寫另一台Eureka的port
-      
+      defaultZone: http://127.0.0.1:${server.port}/eureka
+  server:
+    eviction-interval-timer-in-ms: 45000 # 修改掃描失效服務的間隔時間(單位:毫秒，預設60秒)
+    enable-self-preservation: false # 自我保護機制(false: 取消, 預設是 true)
+
+# 分散式配置(cluster)
+#eureka:
+#  client:
+#    register-with-eureka: true # 是否需要把該服務註冊到Eureka（集群版需要）
+#    fetch-registry: true # 是否需要從Eureka獲取註冊訊息
+#    service-url: # 暴露Eureka的註冊地址
+#      defaultZone: http://127.0.0.1:9999/eureka # 寫另一台Eureka的port
+    
+    
