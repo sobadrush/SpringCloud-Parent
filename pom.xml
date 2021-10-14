@@ -8,51 +8,117 @@
 	<packaging>pom</packaging>
 	<description>This is a project which be used to practice Spring-Cloud</description>
 
+	<!-- 指定去Spring官網抓LIB -->
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	
+	<!-- 指定去Spring官網抓LIB -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<properties>
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-boot.version>2.5.4</spring-boot.version>
+		<spring-cloud.version>2020.0.3</spring-cloud.version>
+		<apache-common.version>3.12.0</apache-common.version>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.5</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>2.5.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<dependencyManagement>
+	<dependencyManagement><!-- 概念類似於在父工程中鎖定版本 -->
 		<dependencies>
+
+			<!-- 在父工程中宣告子工程 dependencyRoot, 以便其他子工程可以調用 -->
 			<dependency>
 				<groupId>com.cathaybk</groupId>
 				<artifactId>dependencyRoot</artifactId>
 				<version>0.0.1-SNAPSHOT</version><!-- maven 打包預設 0.0.1-SNAPSHOT 版本 -->
 			</dependency>
+
+			<!-- 鎖定 spring-cloud-dependencies 版本 -->
+			<!-- spring-cloud-dependencies -->
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-dependencies</artifactId>
+	            <version>${spring-cloud.version}</version>
+	            <type>pom</type><!-- 意味著我們可以將所有的jar包打包成一個pom，然後我們依賴了pom，即可以下載下來所有依賴的jar包 -->
+	            <scope>import</scope><!-- 它只使用在<dependencyManagement>中，表示从其它的pom中导入dependency的配置 -->
+	        </dependency>
+
+			<!-- 父工程中鎖定 spring-boot-starter-data-jpa 版本 -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-jpa</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+
+			<!-- 父工程中鎖定 capache ommons-lang3 版本 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${apache-common.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
+	
 		<!-- 啟用SpringMVC + 內建的JSON轉換 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- capache ommons-lang3 -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
 		</dependency>
 
 	</dependencies>
@@ -61,7 +127,6 @@
 		<module>microservice_user</module>
 		<module>microservice_movie</module>
 		<module>dependencyRoot</module>
+		<module>eureka_server</module>
 	</modules>
 </project>
-
-

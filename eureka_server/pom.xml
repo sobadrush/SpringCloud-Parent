@@ -7,22 +7,16 @@
 		<artifactId>SpringCloud-Parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>dependencyRoot</artifactId>
-	<description>放置其他模組會引用的class的模組</description>
+	<artifactId>eureka_server</artifactId>
+	<description>Eureka Server端</description>
 	
 	<dependencies>
-	
-		<!-- capache ommons-lang3 : 會引用父工程的預設版本 -->
+		<!-- Eureka服務端: spring-cloud-starter-netflix-eureka-server -->
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>		
-		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>		
-		
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		    <version>3.0.4</version>
+		</dependency>
 	</dependencies>
 	
 </project>
