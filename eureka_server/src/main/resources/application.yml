@@ -6,8 +6,8 @@ spring:
 # 單機版配置
 eureka:
   client:
-    fetch-registry: false # 是否需要從Eureka獲取註冊訊息
     register-with-eureka: false # 是否需要把該服務註冊到Eureka（單機版不需要）
-    service-url: # 暴露Eureka的註冊地址
-      defaultZone: http://127.0.0.1:${server.port}
+    fetch-registry: false # 是否需要從Eureka獲取註冊訊息
+    service-url: # 暴露Eureeureka:eurekaka的註冊地址
+      defaultZone: http://127.0.0.1:${server.port}/eureka
       
