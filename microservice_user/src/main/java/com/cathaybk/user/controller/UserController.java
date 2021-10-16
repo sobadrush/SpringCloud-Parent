@@ -3,6 +3,7 @@ package com.cathaybk.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,9 @@ import com.cathaybk.user.service.UserService;
 @RestController // = @RequestMapping + @ResponseBody
 public class UserController {
 
+	@Value("${self-defArg}") // 取得SpringBoot啟動的參數(Boot Dashbard -> Open Config -> Arguments -> Project Arguments)
+    private String microServiceNameFromProjectArg; // 由啟動參數代入的「服務名稱」
+	
 	@Autowired
 	private UserService userSvc;
 	
@@ -35,6 +39,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/getUserById/{uid}", method = RequestMethod.GET)
 	public UserVO getUserById(@PathVariable("uid") int userId) {
+		System.out.println(" >>> 呼叫的是：" + this.microServiceNameFromProjectArg);
 		return userSvc.getUserById(userId);
 	}
 	

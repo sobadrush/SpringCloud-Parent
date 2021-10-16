@@ -1,9 +1,8 @@
 package com.cathaybk.movie.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,19 +21,39 @@ public class MovieController {
 	@Autowired
 	private org.springframework.cloud.client.discovery.DiscoveryClient discoveryClient;
 	
+	@Autowired
+	private LoadBalancerClient loadBalancerClient;
+	
+	/*
+	 * Level 2:
+	 * 1.使用「Ribbon」進行LoadBalance
+	 */
+	@RequestMapping(value = { "/orderTicket/{uid}" }, method = RequestMethod.GET)
+	public String orderTicket(@PathVariable("uid") Integer uid) {
+//		List<ServiceInstance> instances = discoveryClient.getInstances("microservice-user"); // 同一個微服務可能會起多個作load-balance
+//		ServiceInstance svcInstance = instances.get(0); // 目前只有一個 user微服務
+		
+		String serviceId = "microservice-user";
+		ServiceInstance svcInstance = loadBalancerClient.choose(serviceId); // 使用Ribbon進行負載均衡(自動根據RULE選擇服務 (輪詢, 隨機))
+		
+		UserVO userWantToByTicket = restTemplate.getForObject("http://" + svcInstance.getHost() + ":" + svcInstance.getPort() + "/user/getUserById/" + uid, UserVO.class);
+		System.out.println("USER 正在進行購票... : " + userWantToByTicket);
+		return "購票成功";
+	}
+	
 	/*
 	 * Level 1:
 	 * 1.使用「服務發現」Spring 的 DiscoveryClient
 	 * 2.將ip & port解耦
 	 */
-	@RequestMapping(value = { "/orderTicket/{uid}" }, method = RequestMethod.GET)
-	public String orderTicket(@PathVariable("uid") Integer uid) {
-		List<ServiceInstance> instances = discoveryClient.getInstances("microservice-user"); // 同一個微服務可能會起多個作load-balance
-		ServiceInstance svcInstance = instances.get(0); // 目前只有一個 user微服務
-		UserVO userWantToByTicket = restTemplate.getForObject("http://" + svcInstance.getHost() + ":" + svcInstance.getPort() + "/user/getUserById/" + uid, UserVO.class);
-		System.out.println("USER 正在進行購票... : " + userWantToByTicket);
-		return "購票成功";
-	}
+//	@RequestMapping(value = { "/orderTicket/{uid}" }, method = RequestMethod.GET)
+//	public String orderTicket(@PathVariable("uid") Integer uid) {
+//		List<ServiceInstance> instances = discoveryClient.getInstances("microservice-user"); // 同一個微服務可能會起多個作load-balance
+//		ServiceInstance svcInstance = instances.get(0); // 目前只有一個 user微服務
+//		UserVO userWantToByTicket = restTemplate.getForObject("http://" + svcInstance.getHost() + ":" + svcInstance.getPort() + "/user/getUserById/" + uid, UserVO.class);
+//		System.out.println("USER 正在進行購票... : " + userWantToByTicket);
+//		return "購票成功";
+//	}
 	
 	/*
 	 * Level 0:
