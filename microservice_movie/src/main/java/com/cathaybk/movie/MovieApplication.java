@@ -18,6 +18,7 @@ public class MovieApplication {
 	}
 
 	@Bean
+	@org.springframework.cloud.client.loadbalancer.LoadBalanced // 標註此註解，透過restTemplate呼叫服務時會經過底層的一個 intercepter，透過 Ribbon 的附載均衡
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
