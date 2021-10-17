@@ -22,6 +22,8 @@
 |一次打包引發的思考，原來maven還能這麼玩？|https://iter01.com/552665.html|
 |客戶端註冊地址( ★★★ 這邊要一定要寫 /eureka，不是寫 serviceName)|一定要加上/Eureka <br> http://127.0.0.1:8888/eureka|
 |獲取SpringBoot啟動參數|https://springhow.com/spring-boot-application-arguments/|
+|修改Ribbon附載均衡策略|https://cloud.tencent.com/developer/article/1332634|
+|附載均衡攔截器LoadBalancerInterceptor|可用Eclipse 的 Open Type找到其中的intercept方法|
 
 ## 高可用Eureka Server (HA架構 / 分散式架構)
 * 為避免Eureka服務器崩潰，起2台

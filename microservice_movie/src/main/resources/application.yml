@@ -15,5 +15,12 @@ eureka:
       defaultZone: http://127.0.0.1:8888/eureka,http://127.0.0.1:9999/eureka # 客戶端註冊地址( ★★★ 這邊要一定要寫 /eureka，不是寫 serviceName)
   instance:
     prefer-ip-address: true # 優先使用該服務的ip地址註冊到Eureka，在生產環境設為true
-    
- 
+
+# 修改Ribbon附載均衡策略
+microservice-user:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 配置規則－隨機策略
+   # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule # 配置規則－輪詢
+   # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RetryRule # 配置規則－重試
+   # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule # 配置規則－響應時間權重
+   # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule # 配置規則－最空閒連接策略
