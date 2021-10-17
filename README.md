@@ -45,3 +45,9 @@
 * 自我保護 - Eureka會統計最近15分鐘心跳失敗的服務之比例是否超過85%，就將服務剔除，但實務上可能因為網路速度等其他因素造成，PROD環境最好可以調整此參數
 * 	enable-self-preservation: false # 自我保護機制(false: 取消，預設是 true)
 
+## 導入OpenFeign
+1. 『調用方』導入OpenFeign依賴
+2. 編寫『代理interface』(底層是"動態代理"，類似MyBatis中的Mapper介面)
+3. 於『代理interface』上標注 @FeignClient(value = "被調用的服務ID")
+4. 把『被調用方』的方法copy到此，並於 @RequestMapping 上補全完整調用URI
+5. 於SpringBoot啟動類別上標注 @EnableFeignClients

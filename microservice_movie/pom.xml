@@ -32,6 +32,12 @@
 		    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>        
         
+        <!-- 『調用方』導入spring-cloud-starter-openfeign -->
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+        
 	</dependencies>
 
 </project>

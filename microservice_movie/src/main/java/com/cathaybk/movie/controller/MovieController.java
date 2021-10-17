@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.cathaybk.movie.clientchannel.UserChannel;
 import com.cathaybk.user.model.UserVO;
 
 @RequestMapping("/movie")
 @RestController
 public class MovieController {
 
-	@Autowired
+	@Autowired(required = false)
 	private RestTemplate restTemplate;
 	
 	@Autowired
@@ -22,18 +23,34 @@ public class MovieController {
 	@Autowired
 	private org.springframework.cloud.client.loadbalancer.LoadBalancerClient loadBalancerClient;
 	
+	@Autowired
+	private UserChannel userChannel; // Runtime時會產生代理的實作
+	
+	/*
+	 * Level 4:
+	 * 1. 使用 OpenFeign 簡化
+	 * 2. OpenFeign底層自動導入了Ribbon附載均衡
+	 */
+	@RequestMapping(value = { "/orderTicket/{uid}" }, method = RequestMethod.GET)
+	public String orderTicket(@PathVariable("uid") Integer uid) {
+		System.out.println(">>> 使用OpenFeign調用『User微服務』 <<<");
+		UserVO userWantToByTicket = userChannel.getUserById(uid);
+		System.out.println("USER 正在進行購票... : " + userWantToByTicket);
+		return "購票成功";
+	}
+	
 	/*
 	 * Level 3:
 	 * 1. 在RestTemplate上標注 @LoadBalance (透過此配置的restTemplate呼叫服務時會經過底層的一個 intercepter，透過 Ribbon 的附載均衡)
 	 * 2. call被呼叫方時，直接於URL中寫serviceId : 如 http://${serviceId}/user/getUserById/${uid}
 	 */
-	@RequestMapping(value = { "/orderTicket/{uid}" }, method = RequestMethod.GET)
-	public String orderTicket(@PathVariable("uid") Integer uid) {
-		String serviceId = "microservice-user";
-		UserVO userWantToByTicket = restTemplate.getForObject("http://" + serviceId + "/user/getUserById/" + uid, UserVO.class);
-		System.out.println("USER 正在進行購票... : " + userWantToByTicket);
-		return "購票成功";
-	}
+//	@RequestMapping(value = { "/orderTicket/{uid}" }, method = RequestMethod.GET)
+//	public String orderTicket(@PathVariable("uid") Integer uid) {
+//		String serviceId = "microservice-user";
+//		UserVO userWantToByTicket = restTemplate.getForObject("http://" + serviceId + "/user/getUserById/" + uid, UserVO.class);
+//		System.out.println("USER 正在進行購票... : " + userWantToByTicket);
+//		return "購票成功";
+//	}
 	
 	/*
 	 * Level 2:
