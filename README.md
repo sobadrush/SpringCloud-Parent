@@ -10,7 +10,8 @@
 |:----:|---|
 |docker啟動MYSQL| # docker cmd: docker run -di --name=mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=sa123456 centos/mysql-57-centos7 |
 |使用cmd登入MYSQL|1. docker exec -it mysql /bin/sh<br>2.mysql -u root (不用加-p，root預設是不用密碼登入的)|
-|進入Eureka Web畫面|http://localhost:8888/|    
+|進入Eureka Web畫面|http://localhost:8888/|
+|加入Maven子模組|對SpringCloud-Parent右鍵 → new... Maven Module|  
 
 ## 其他問題
 |問題|連結|
