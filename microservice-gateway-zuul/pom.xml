@@ -7,15 +7,23 @@
 		<artifactId>SpringCloud-Parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>eureka_server</artifactId>
-	<description>Eureka Server端</description>
-	
+	<artifactId>microservice-gateway-zuul</artifactId>
+
 	<dependencies>
-		<!-- Eureka服務端: spring-cloud-starter-netflix-eureka-server -->
+	
+		<!-- 子模組導入 spring-cloud-starter-netflix-eureka-client -->
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
-		    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		</dependency>
-	</dependencies>
+		    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>	
 	
+		<!-- 導入網關：spring-cloud-starter-netflix-zuul -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+			<version>2.2.0.RELEASE</version>
+		</dependency>
+		
+	</dependencies>
+
 </project>

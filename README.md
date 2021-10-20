@@ -25,6 +25,8 @@
 |獲取SpringBoot啟動參數|https://springhow.com/spring-boot-application-arguments/|
 |修改Ribbon附載均衡策略|https://cloud.tencent.com/developer/article/1332634|
 |附載均衡攔截器LoadBalancerInterceptor|可用Eclipse 的 Open Type找到其中的intercept方法|
+|Spring Cloud正式移除Hystrix、Zuul等Netflix OSS元件|https://iter01.com/574376.html|
+|springcloud微服務- 集成Zuul網關無法通過網關| Google it! 版本匹配問題 <br> https://www.cxymm.net/article/laoran_520/118736047|
 
 ## 高可用Eureka Server (HA架構 / 分散式架構)
 * 為避免Eureka服務器崩潰，起2台

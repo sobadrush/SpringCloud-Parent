@@ -51,7 +51,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-boot.version>2.5.4</spring-boot.version>
+		<spring-boot-starter.version>2.5.4</spring-boot-starter.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
 		<apache-common.version>3.12.0</apache-common.version>
 	</properties>
@@ -87,7 +87,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-data-jpa</artifactId>
-				<version>${spring-boot.version}</version>
+				<version>${spring-boot-starter.version}</version>
 			</dependency>
 
 			<!-- 父工程中鎖定 capache ommons-lang3 版本 -->
@@ -123,10 +123,13 @@
 
 	</dependencies>
 
+	<!-- Maven Sub-Module -->
 	<modules>
+		<module>dependencyRoot</module>
 		<module>microservice_user</module>
 		<module>microservice_movie</module>
-		<module>dependencyRoot</module>
 		<module>eureka_server</module>
+		<module>microservice-gateway-zuul</module>
 	</modules>
+	
 </project>

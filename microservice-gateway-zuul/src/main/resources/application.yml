@@ -1,0 +1,26 @@
+server:
+  port: 8222
+spring:
+  application:
+    name: microservice-gateway
+eureka: # 需導入Eureka-Client dependency
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8888/eureka # 8888 是 eureka-server 的 port，一定要加 /eureka
+  instance:
+    prefer-ip-address: true # 優先使用該服務的ip地址註冊到Eureka，在生產環境設為true
+
+# 使用 zuul 進行動態路由 (類似Angular的路由配置)
+zuul:
+  host: # 避免 zuul的調用等待時間超時
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  routes:
+    microservice-user: # 自定義的key(通常會跟serviceId取一模一樣)
+      path: /microservice-user # 需要轉發的路徑
+      service-id: microservice-user # 微服務ID
+    selfDefKey-microservice-movie:
+      path: /microservice-movie
+      service-id: microservice-movie
