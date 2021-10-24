@@ -17,7 +17,7 @@ import com.cathaybk.user.service.UserService;
 @RestController // = @RequestMapping + @ResponseBody
 public class UserController {
 
-	@Value("${self-defArg}") // 取得SpringBoot啟動的參數(Boot Dashbard -> Open Config -> Arguments -> Project Arguments)
+	@Value("${self-defArg:\"我是預設值\"}") // 取得SpringBoot啟動的參數(Boot Dashbard -> Open Config -> Arguments -> Project Arguments)
     private String microServiceNameFromProjectArg; // 由啟動參數代入的「服務名稱」
 	
 	@Autowired
