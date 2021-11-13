@@ -28,6 +28,7 @@
 |Spring Cloud正式移除Hystrix、Zuul等Netflix OSS元件|https://iter01.com/574376.html|
 |springcloud微服務- 集成Zuul網關無法通過網關| Google it! 版本匹配問題 <br> https://www.cxymm.net/article/laoran_520/118736047|
 |SpringEL預設值|https://www.baeldung.com/spring-value-defaults|
+|SpringBoot版本，Zuul錯誤問題(With Boot 2.4.8 works fine)|https://githubmemory.com/repo/spring-cloud/spring-cloud-netflix/activity|
 
 ## 高可用Eureka Server (HA架構 / 分散式架構)
 * 為避免Eureka服務器崩潰，起2台
